@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+<h:head>
+    <title>Cadastrar Tarefa</title>
+    <style>
+        .form-box {
+            border: 1px solid #ccc;
+            padding: 20px;
+            border-radius: 10px;
+            width: 500px;
+            margin: auto;
+            background-color: #f9f9f9;
+        }
+
+        .form-box h2 {
+            margin-bottom: 20px;
+        }
+
+        .form-row {
+            margin-bottom: 15px;
+        }
+
+        label {
+            display: inline-block;
+            width: 100px;
+            font-weight: bold;
+        }
+
+        input[type="text"],
+        textarea,
+        select {
+            width: 300px;
+        }
+
+        .btn-center {
+            text-align: center;
+        }
+    </style>
+</h:head>
+<h:body>
+
+    <h:form>
+        <div class="form-box">
+            <h2>Cadastrar Tarefa</h2>
+
+            <div class="form-row">
+                <label for="titulo">Título:</label>
+                <h:inputText id="titulo" value="#{tarefaBean.tarefa.titulo}" required="true"/>
+            </div>
+
+            <div class="form-row">
+                <label for="descricao">Descrição:</label>
+                <h:inputTextarea id="descricao" value="#{tarefaBean.tarefa.descricao}" rows="4" cols="40"/>
+            </div>
+
+            <div class="form-row">
+                <label for="responsavel">Responsável:</label>
+                <h:selectOneMenu id="responsavel" value="#{tarefaBean.tarefa.responsavel}" required="true">
+                    <f:selectItem itemLabel="Selecione" noSelectionOption="true"/>
+                    <f:selectItems value="#{tarefaBean.responsaveis}" var="r"
+                                   itemLabel="#{r.nome}" itemValue="#{r}"/>
+                </h:selectOneMenu>
+            </div>
+
+            <div class="form-row">
+                <label for="prioridade">Prioridade:</label>
+                <h:selectOneMenu id="prioridade" value="#{tarefaBean.tarefa.prioridade}" required="true">
+                    <f:selectItem itemLabel="Selecione" itemValue="" noSelectionOption="true"/>
+                    <f:selectItem itemLabel="Alta" itemValue="Alta"/>
+                    <f:selectItem itemLabel="Média" itemValue="Média"/>
+                    <f:selectItem itemLabel="Baixa" itemValue="Baixa"/>
+                </h:selectOneMenu>
+            </div>
+
+            <div class="form-row">
+                <label for="deadline">Deadline:</label>
+                <h:inputText id="deadline" value="#{tarefaBean.tarefa.deadline}">
+                    <f:convertDateTime pattern="yyyy-MM-dd"/>
+                </h:inputText>
+            </div>
+
+            <div class="form-row btn-center">
+                <h:commandButton value="Cadastrar" action="#{tarefaBean.salvar}"/>
+            </div>
+        </div>
+    </h:form>
+
+</h:body>
+</html>
