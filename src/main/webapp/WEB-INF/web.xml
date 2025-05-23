@@ -8,7 +8,7 @@
   <display-name>Gerenciador de Tarefas</display-name>
 
   <welcome-file-list>
-    <welcome-file>index.xhtml</welcome-file>
+    <welcome-file>lista.xhtml</welcome-file>
   </welcome-file-list>
 
   <servlet>

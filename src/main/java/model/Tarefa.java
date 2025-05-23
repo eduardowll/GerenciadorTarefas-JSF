@@ -1,7 +1,7 @@
 package model;
 
 import javax.persistence.*;
-import java.time.LocalDate;
+import java.util.Date;
 
 @Entity
 public class Tarefa {
@@ -18,7 +18,9 @@ public class Tarefa {
     private Responsavel responsavel;
 
     private String prioridade;
-    private LocalDate deadline;
+
+    @Temporal(TemporalType.DATE)
+    private Date deadline;
 
     @Column(columnDefinition = "VARCHAR(30) DEFAULT 'Em andamento'")
     private String status;
@@ -67,11 +69,11 @@ public class Tarefa {
         this.prioridade = prioridade;
     }
 
-    public LocalDate getDeadline() {
+    public Date getDeadline() {
         return deadline;
     }
 
-    public void setDeadline(LocalDate deadline) {
+    public void setDeadline(Date deadline) {
         this.deadline = deadline;
     }
 

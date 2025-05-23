@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+<h:head>
+    <title>Lista de Tarefas</title>
+</h:head>
+<h:body>
+    <h2>Lista de Tarefas</h2>
+
+    <h:form>
+        <h:commandButton value="Nova Tarefa" action="cadastro.xhtml?faces-redirect=true"/>
+    </h:form>
+
+    <h:dataTable value="#{listaBean.tarefas}" var="t" border="1">
+
+        <h:column>
+            <f:facet name="header">Título</f:facet>
+            #{t.titulo}
+        </h:column>
+
+        <h:column>
+            <f:facet name="header">Descrição</f:facet>
+            #{t.descricao}
+        </h:column>
+
+        <h:column>
+            <f:facet name="header">Prioridade</f:facet>
+            #{t.prioridade}
+        </h:column>
+
+        <h:column>
+            <f:facet name="header">Responsável</f:facet>
+            #{t.responsavel.nome}
+        </h:column>
+
+        <h:column>
+            <f:facet name="header">Status</f:facet>
+            #{t.status}
+        </h:column>
+
+        <h:column>
+            <f:facet name="header">Deadline</f:facet>
+            <h:outputText value="#{t.deadline}">
+                <f:convertDateTime pattern="dd/MM/yyyy"/>
+            </h:outputText>
+        </h:column>
+
+        <h:column>
+            <f:facet name="header">Ações</f:facet>
+
+            <h:form>
+                <h:commandButton value="Editar" action="#{listaBean.editar(t.id)}" />
+            </h:form>
+
+            <h:form>
+                <h:commandButton value="Excluir"
+                                 action="#{listaBean.excluir(t.id)}"
+                                 onclick="return confirm('Tem certeza que deseja excluir?');"/>
+            </h:form>
+
+            <h:form>
+                <h:commandButton value="Concluir"
+                                 action="#{listaBean.concluir(t.id)}"
+                                 rendered="#{t.status eq 'Em andamento'}"/>
+            </h:form>
+
+        </h:column>
+    </h:dataTable>
+</h:body>
+</html>
