@@ -5,10 +5,10 @@ import dao.TarefaDAO;
 import model.Responsavel;
 import model.Tarefa;
 
-import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 @ManagedBean(name = "listaBean")
@@ -28,20 +28,41 @@ public class ListaBean implements Serializable {
     private Long responsavelIdFiltro;
     private String statusFiltro;
 
-    @PostConstruct
-    public void init() {
-        tarefas = tarefaDAO.listarTodas();
-        tarefasFiltradas = tarefas; // inicialmente mostra todas
-        responsaveis = responsavelDAO.listarTodos();
+    // Construtor
+    public ListaBean() {
+        // Inicialização segura
+        this.tarefas = new ArrayList<>();
+        this.tarefasFiltradas = new ArrayList<>();
+        this.responsaveis = new ArrayList<>();
+    }
+
+    //carregar se quando precisar
+    public void carregarDados() {
+        try {
+            if (tarefas.isEmpty()) {
+                tarefas = tarefaDAO.listarTodas();
+                tarefasFiltradas = tarefas;
+            }
+            if (responsaveis.isEmpty()) {
+                responsaveis = responsavelDAO.listarTodos();
+            }
+        } catch (Exception e) {
+            System.err.println("Erro ao carregar dados: " + e.getMessage());
+            // Manter listas vazias em caso de erro
+        }
     }
 
     public void buscarTarefas() {
-        tarefasFiltradas = tarefaDAO.buscarComFiltros(
-                numeroFiltro,
-                tituloDescricaoFiltro,
-                responsavelIdFiltro,
-                statusFiltro
-        );
+        try {
+            tarefasFiltradas = tarefaDAO.buscarComFiltros(
+                    numeroFiltro,
+                    tituloDescricaoFiltro,
+                    responsavelIdFiltro,
+                    statusFiltro
+            );
+        } catch (Exception e) {
+            System.err.println("Erro ao buscar tarefas: " + e.getMessage());
+        }
     }
 
     public void limparFiltros() {
@@ -49,13 +70,20 @@ public class ListaBean implements Serializable {
         tituloDescricaoFiltro = null;
         responsavelIdFiltro = null;
         statusFiltro = null;
-        tarefasFiltradas = tarefaDAO.listarTodas();
+        try {
+            tarefasFiltradas = tarefaDAO.listarTodas();
+        } catch (Exception e) {
+            System.err.println("Erro ao limpar filtros: " + e.getMessage());
+        }
     }
 
     public void excluir(Long id) {
-        tarefaDAO.remover(id);
-        // Reaplica os filtros após excluir
-        buscarTarefas();
+        try {
+            tarefaDAO.remover(id);
+            buscarTarefas();
+        } catch (Exception e) {
+            System.err.println("Erro ao excluir tarefa: " + e.getMessage());
+        }
     }
 
     public String editar(Long id) {
@@ -63,17 +91,21 @@ public class ListaBean implements Serializable {
     }
 
     public void concluir(Long id) {
-        Tarefa tarefa = tarefaDAO.buscarPorId(id);
-        if (tarefa != null && !"Concluído".equals(tarefa.getStatus())) {
-            tarefa.setStatus("Concluído");
-            tarefaDAO.salvar(tarefa);
-            // Reaplica os filtros após concluir
-            buscarTarefas();
+        try {
+            Tarefa tarefa = tarefaDAO.buscarPorId(id);
+            if (tarefa != null && !"Concluído".equals(tarefa.getStatus())) {
+                tarefa.setStatus("Concluído");
+                tarefaDAO.salvar(tarefa);
+                buscarTarefas();
+            }
+        } catch (Exception e) {
+            System.err.println("Erro ao concluir tarefa: " + e.getMessage());
         }
     }
 
     // Getters e Setters
     public List<Tarefa> getTarefas() {
+        carregarDados(); // Carrega dados quando necessário
         return tarefas;
     }
 
@@ -82,6 +114,7 @@ public class ListaBean implements Serializable {
     }
 
     public List<Tarefa> getTarefasFiltradas() {
+        carregarDados(); // Carrega dados quando necessário
         return tarefasFiltradas;
     }
 
@@ -90,6 +123,7 @@ public class ListaBean implements Serializable {
     }
 
     public List<Responsavel> getResponsaveis() {
+        carregarDados(); // Carrega dados quando necessário
         return responsaveis;
     }
 
