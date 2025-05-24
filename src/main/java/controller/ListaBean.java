@@ -11,7 +11,7 @@ import javax.faces.bean.ViewScoped;
 import java.io.Serializable;
 import java.util.List;
 
-@ManagedBean
+@ManagedBean(name = "listaBean")
 @ViewScoped
 public class ListaBean implements Serializable {
 

@@ -13,7 +13,7 @@ import java.io.Serializable;
 import java.util.List;
 import java.util.Map;
 
-@ManagedBean
+@ManagedBean(name = "cadastroBean")
 @ViewScoped
 public class CadastroBean implements Serializable {
 
