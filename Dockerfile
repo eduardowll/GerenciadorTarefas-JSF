@@ -1,3 +1,7 @@
+# Estágio 1: Build da aplicação
+FROM maven:3.8.4-openjdk-8 AS builder
+WORKDIR /app
+
 # Copia o pom.xml primeiro (para cache de dependências)
 COPY pom.xml .
 RUN mvn dependency:go-offline
@@ -13,11 +17,11 @@ FROM tomcat:9.0-jdk8-openjdk
 
 LABEL maintainer="Eduardo"
 
-# Remove aplicações padrão do Tomcat
 RUN rm -rf /usr/local/tomcat/webapps/*
 
 COPY --from=builder /app/target/GerenciadorTarefas.war /usr/local/tomcat/webapps/ROOT.war
 
 EXPOSE 8080
 
+# Comando pra iniciar o Tomcat
 CMD ["catalina.sh", "run"]
