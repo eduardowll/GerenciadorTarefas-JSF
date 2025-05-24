@@ -31,7 +31,7 @@ public class CadastroBean implements Serializable {
         this.responsaveis = new ArrayList<>();
     }
 
-    //carregar se quando precisar
+    //carregar quando precisar
     public void carregarDados() {
         if (!dadosCarregados) {
             try {

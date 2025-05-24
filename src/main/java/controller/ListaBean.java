@@ -36,7 +36,7 @@ public class ListaBean implements Serializable {
         this.responsaveis = new ArrayList<>();
     }
 
-    //carregar se quando precisar
+    //carregar quando precisar
     public void carregarDados() {
         try {
             if (tarefas.isEmpty()) {
