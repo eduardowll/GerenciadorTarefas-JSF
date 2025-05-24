@@ -10,23 +10,6 @@ public class ResponsavelDAO {
     private static final EntityManagerFactory emf =
             Persistence.createEntityManagerFactory("tarefasPU");
 
-    public void salvar(Responsavel responsavel) {
-        EntityManager em = emf.createEntityManager();
-        try {
-            em.getTransaction().begin();
-
-            if (responsavel.getId() == null) {
-                em.persist(responsavel);
-            } else {
-                em.merge(responsavel);
-            }
-
-            em.getTransaction().commit();
-        } finally {
-            em.close();
-        }
-    }
-
     public Responsavel buscarPorId(Long id) {
         EntityManager em = emf.createEntityManager();
         try {

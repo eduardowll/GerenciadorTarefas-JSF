@@ -1,46 +1,12 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
+      xmlns:f="http://java.sun.com/jsf/core">
 <h:head>
+    <h:outputStylesheet library="css" name="estilos.css" />
     <title>Cadastrar Tarefa</title>
-    <style>
-        .form-box {
-            border: 1px solid #ccc;
-            padding: 20px;
-            border-radius: 10px;
-            width: 500px;
-            margin: auto;
-            background-color: #f9f9f9;
-        }
-
-        .form-box h2 {
-            margin-bottom: 20px;
-        }
-
-        .form-row {
-            margin-bottom: 15px;
-        }
-
-        label {
-            display: inline-block;
-            width: 100px;
-            font-weight: bold;
-        }
-
-        input[type="text"],
-        textarea,
-        select {
-            width: 300px;
-        }
-
-        .btn-center {
-            text-align: center;
-        }
-    </style>
 </h:head>
 <h:body>
-
     <h:form>
         <div class="form-box">
             <h2>Cadastrar Tarefa</h2>
@@ -75,9 +41,9 @@
             </div>
 
             <div class="form-row">
-                <label for="Data de expiração">Deadline:</label>
+                <label for="deadline">Deadline:</label>
                 <h:inputText id="deadline" value="#{cadastroBean.tarefa.deadline}">
-                    <f:convertDateTime pattern="dd/MM/yyyy"/>
+                    <f:convertDateTime pattern="dd/MM/yyyy" timeZone="GMT-3"/>
                 </h:inputText>
             </div>
 
