@@ -85,7 +85,6 @@ public class TarefaDAO {
 
             TypedQuery<Tarefa> query = em.createQuery(jpql.toString(), Tarefa.class);
 
-            // Define os parâmetros
             if (numero != null && !numero.trim().isEmpty()) {
                 query.setParameter("numero", "%" + numero + "%");
             }

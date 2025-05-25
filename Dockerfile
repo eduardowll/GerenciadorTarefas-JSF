@@ -1,18 +1,17 @@
-# Estágio 1: Build da aplicação
+#Estágio 1: Build da aplicação
 FROM maven:3.8.4-openjdk-8 AS builder
 WORKDIR /app
 
-# Copia o pom.xml primeiro (para cache de dependências)
 COPY pom.xml .
 RUN mvn dependency:go-offline
 
-# Copia o código fonte
+#Copia o código fonte
 COPY src ./src
 
-# Compila a aplicação
+#Compila a aplicação
 RUN mvn clean package -DskipTests
 
-# Estágio 2: Runtime
+#Estágio 2: Runtime
 FROM tomcat:9.0-jdk8-openjdk
 
 LABEL maintainer="Eduardo"
@@ -23,5 +22,5 @@ COPY --from=builder /app/target/GerenciadorTarefas.war /usr/local/tomcat/webapps
 
 EXPOSE 8080
 
-# Comando pra iniciar o Tomcat
+#Comando pra iniciar o Tomcat
 CMD ["catalina.sh", "run"]

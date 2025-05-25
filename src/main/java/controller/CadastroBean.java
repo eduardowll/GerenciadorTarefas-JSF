@@ -25,7 +25,6 @@ public class CadastroBean implements Serializable {
     private TarefaDAO tarefaDAO = new TarefaDAO();
     private ResponsavelDAO responsavelDAO = new ResponsavelDAO();
 
-    // Construtor
     public CadastroBean() {
         this.tarefa = new Tarefa();
         this.responsaveis = new ArrayList<>();
@@ -58,7 +57,6 @@ public class CadastroBean implements Serializable {
 
             } catch (Exception e) {
                 System.err.println("Erro ao carregar dados: " + e.getMessage());
-                // Manter valores padrão em caso de erro
                 if (tarefa == null) {
                     tarefa = new Tarefa();
                 }
@@ -82,7 +80,7 @@ public class CadastroBean implements Serializable {
     }
 
     public Tarefa getTarefa() {
-        carregarDados(); // Carrega dados quando necessário
+        carregarDados();
         return tarefa;
     }
 
@@ -91,7 +89,7 @@ public class CadastroBean implements Serializable {
     }
 
     public List<Responsavel> getResponsaveis() {
-        carregarDados(); // Carrega dados quando necessário
+        carregarDados();
         return responsaveis;
     }
 

@@ -22,13 +22,11 @@ public class ListaBean implements Serializable {
     private TarefaDAO tarefaDAO = new TarefaDAO();
     private ResponsavelDAO responsavelDAO = new ResponsavelDAO();
 
-    // Campos de filtro
     private String numeroFiltro;
     private String tituloDescricaoFiltro;
     private Long responsavelIdFiltro;
     private String statusFiltro;
 
-    // Construtor
     public ListaBean() {
         // Inicialização segura
         this.tarefas = new ArrayList<>();
@@ -48,7 +46,6 @@ public class ListaBean implements Serializable {
             }
         } catch (Exception e) {
             System.err.println("Erro ao carregar dados: " + e.getMessage());
-            // Manter listas vazias em caso de erro
         }
     }
 
@@ -103,7 +100,6 @@ public class ListaBean implements Serializable {
         }
     }
 
-    // Getters e Setters
     public List<Tarefa> getTarefas() {
         carregarDados(); // Carrega dados quando necessário
         return tarefas;

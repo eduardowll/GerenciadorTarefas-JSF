@@ -42,4 +42,4 @@ A - Aplicação Java Web com JSF
 B - Banco de dados PostgreSQL
 C - JPA com Hibernate
 D - Testes unitários com JUnit
-E - Publicação na nuvem
+E - Publicação na nuvem: https://gerenciadortarefas-l07n.onrender.com
