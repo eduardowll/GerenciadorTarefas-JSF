@@ -3,8 +3,79 @@
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:f="http://java.sun.com/jsf/core">
 <h:head>
-    <h:outputStylesheet library="css" name="estilos.css" />
     <title>Cadastrar Tarefa</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f5f5f5;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        h2 {
+            text-align: center;
+            color: #333;
+        }
+
+        .form-box {
+            background-color: #ffffff;
+            border-radius: 12px;
+            padding: 25px 30px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            max-width: 500px;
+            width: 90%;
+            margin-bottom: 25px;
+        }
+
+        .form-row {
+            margin-bottom: 15px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        label {
+            font-weight: bold;
+            color: #444;
+            margin-bottom: 5px;
+        }
+
+        input[type="text"],
+        input[type="date"],
+        textarea,
+        select {
+            width: 100%;
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            font-size: 14px;
+            background-color: #fefefe;
+            box-sizing: border-box;
+        }
+
+        .btn-center {
+            text-align: center;
+        }
+
+        .btn-center input {
+            padding: 10px 20px;
+            font-size: 14px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            background-color: #4CAF50;
+            color: white;
+            transition: background-color 0.3s;
+        }
+
+        .btn-center input:hover {
+            background-color: #45a049;
+        }
+    </style>
 </h:head>
 <h:body>
     <h:form>
@@ -42,8 +113,8 @@
 
             <div class="form-row">
                 <label for="deadline">Deadline:</label>
-                <h:inputText id="deadline" value="#{cadastroBean.tarefa.deadline}">
-                    <f:convertDateTime pattern="dd/MM/yyyy" timeZone="GMT-3"/>
+                <h:inputText id="deadline" value="#{cadastroBean.tarefa.deadline}" type="date" required="true">
+                    <f:convertDateTime pattern="yyyy-MM-dd" timeZone="GMT-3"/>
                 </h:inputText>
             </div>
 
@@ -52,6 +123,5 @@
             </div>
         </div>
     </h:form>
-
 </h:body>
 </html>
