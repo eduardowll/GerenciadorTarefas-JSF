@@ -113,8 +113,8 @@
 
             <div class="form-row">
                 <label for="deadline">Deadline:</label>
-                <h:inputText id="deadline" value="#{cadastroBean.tarefa.deadline}" type="date" required="true">
-                    <f:convertDateTime pattern="yyyy-MM-dd" timeZone="GMT-3"/>
+                <h:inputText id="deadline" value="#{cadastroBean.tarefa.deadline}">
+                    <f:convertDateTime pattern="dd/MM/yyyy" locale="pt_BR" timeZone="America/Sao_Paulo"/>
                 </h:inputText>
             </div>
 
