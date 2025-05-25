@@ -43,3 +43,4 @@ B - Banco de dados PostgreSQL
 C - JPA com Hibernate
 D - Testes unitários com JUnit
 E - Publicação na nuvem: https://gerenciadortarefas-l07n.onrender.com
+LINK VIDEO EXPLICANDO O CODIGO E A APLICAÇÃO: https://youtu.be/ERu7jr47isk
