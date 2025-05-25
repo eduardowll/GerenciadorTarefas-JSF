@@ -13,7 +13,7 @@ public class TarefaTest {
     public void AtribuireAcessarCampos() {
         Tarefa tarefa = new Tarefa();
         tarefa.setTitulo("Estudar");
-        tarefa.setDescricao("Estudar Java");
+        tarefa.setDescricao("Estudar Java e JSF para entrar na ESIG");
         tarefa.setPrioridade("Alta");
         tarefa.setStatus("Em andamento");
 
